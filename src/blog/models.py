@@ -5,7 +5,7 @@ from django.db.models import (
     ManyToManyField,
     Model,
 )
-from django.db.models import AutoSlugField
+from django_extensions.db.fields import AutoSlugField
 from organizer.models import Startup, Tag
 
 

@@ -10,7 +10,7 @@ from django.db.models import (
     ForeignKey,
     CASCADE,
 )
-from django.db.models import AutoSlugField
+from django_extensions.db.fields import AutoSlugField
 
 
 class Tag(Model):
@@ -32,9 +32,9 @@ class Tag(Model):
 class Startup(Model):
 
     name = CharField(max_length=31, db_index=True)
-    slug = AutoSlugField(
+    slug = SlugField(
         max_length=31,
-        populate_from=["name"],
+        unique=True,
         help_text="A label for url config",
     )
     description = TextField()
