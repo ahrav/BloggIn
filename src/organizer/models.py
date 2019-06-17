@@ -7,15 +7,18 @@ from django.db.models import (
     TextField,
     URLField,
     EmailField,
+    ForeignKey,
+    CASCADE,
 )
+from django.db.models import AutoSlugField
 
 
 class Tag(Model):
 
     name = CharField(max_length=31, unique=True)
-    slug = SlugField(
+    slug = AutoSlugField(
         max_length=31,
-        unique=True,
+        populate_from=["name"],
         help_text="A label for url config",
     )
 
@@ -29,9 +32,9 @@ class Tag(Model):
 class Startup(Model):
 
     name = CharField(max_length=31, db_index=True)
-    slug = SlugField(
+    slug = AutoSlugField(
         max_length=31,
-        unique=True,
+        populate_from=["name"],
         help_text="A label for url config",
     )
     description = TextField()
@@ -51,7 +54,9 @@ class Startup(Model):
 class NewsLink(Model):
 
     title = CharField(max_length=31)
-    slug = SlugField(max_length=31)
+    slug = AutoSlugField(
+        max_length=31, populate_from=["title"]
+    )
     pub_date = DateField("date published")
     link = URLField(max_length=255)
     startup = ForeignKey(Startup, on_delete=CASCADE)

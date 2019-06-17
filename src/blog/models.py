@@ -1,18 +1,20 @@
 from django.db.models import (
     CharField,
-    SlugField,
     TextField,
     DateField,
     ManyToManyField,
     Model,
 )
+from django.db.models import AutoSlugField
 from organizer.models import Startup, Tag
 
 
 class Post(Model):
 
     title = CharField(max_length=63)
-    slug = SlugField(max_length=63)
+    slug = AutoSlugField(
+        max_length=63, populate_from=["title"]
+    )
     text = TextField()
     pub_date = DateField()
     pub_date = DateField()
