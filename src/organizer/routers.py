@@ -5,12 +5,14 @@ from .views import (
     TagAPIList,
     StartupAPIDetail,
     StartupAPIList,
+    NewsLinkAPIDetail,
+    NewsLinkAPIList,
 )
 
 urlpatterns = [
     path("tag/", TagAPIList.as_view(), name="api-tag-list"),
     path(
-        "tag/<str: slug>/",
+        "tag/<str:slug>/",
         TagAPIDetail.as_view(),
         name="api-tag-detail",
     ),
@@ -20,8 +22,18 @@ urlpatterns = [
         name="api-startup-list",
     ),
     path(
-        "startup/<str: slug>/",
+        "startup/<str:slug>/",
         StartupAPIDetail.as_view(),
         name="api-startup-detail",
+    ),
+    path(
+        "newslink/",
+        NewsLinkAPIList.as_view(),
+        name="api-newslink-list",
+    ),
+    path(
+        "startup/<str:startup_slug>/<str:newslink_slug>",
+        NewsLinkAPIDetail.as_view(),
+        name="api-newslink-detail",
     ),
 ]
