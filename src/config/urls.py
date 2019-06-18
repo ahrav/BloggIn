@@ -25,5 +25,5 @@ api_urls = blog_api_urls + organizer_api_urls
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("api/vi/", include(api_urls)),
+    path("api/v1/", include(api_urls)),
 ]
