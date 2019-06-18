@@ -1,40 +1,14 @@
 from django.shortcuts import get_object_or_404
 from rest_framework.generics import (
-    ListAPIView,
-    RetrieveAPIView,
+    ListCreateAPIView,
+    RetrieveUpdateDestroyAPIView,
 )
 
-from .serializers import (
-    TagSerializer,
-    StartupSerializer,
-    NewsLinkSerializer,
-)
-from .models import Tag, Startup, NewsLink
+from .serializers import NewsLinkSerializer
+from .models import NewsLink
 
 
-class TagAPIDetail(RetrieveAPIView):
-    queryset = Tag.objects.all()
-    serializer_class = TagSerializer
-    lookup_field = "slug"
-
-
-class StartupAPIDetail(RetrieveAPIView):
-    queryset = Startup.objects.all()
-    serializer_class = StartupSerializer
-    lookup_field = "slug"
-
-
-class StartupAPIList(ListAPIView):
-    queryset = Startup.objects.all()
-    serializer_class = StartupSerializer
-
-
-class TagAPIList(ListAPIView):
-    queryset = Tag.objects.all()
-    serializer_class = TagSerializer
-
-
-class NewsLinkAPIDetail(RetrieveAPIView):
+class NewsLinkAPIDetail(RetrieveUpdateDestroyAPIView):
     queryset = NewsLink.objects.all()
     serializer_class = NewsLinkSerializer
 
@@ -56,6 +30,6 @@ class NewsLinkAPIDetail(RetrieveAPIView):
         return newslink
 
 
-class NewsLinkAPIList(ListAPIView):
+class NewsLinkAPIList(ListCreateAPIView):
     queryset = NewsLink.objects.all()
     serializer_class = NewsLinkSerializer
